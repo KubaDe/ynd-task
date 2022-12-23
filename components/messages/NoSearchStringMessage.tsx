@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import {
   Alert,
@@ -8,10 +8,15 @@ import {
 } from '@chakra-ui/alert';
 
 const NoSearchStringMessage: FC = () => {
+  const [showMessage, setShowMessage] = useState(false);
   const { isReady } = useRouter();
-  if (!isReady) {
+  useEffect(() => {
+    setShowMessage(true);
+  }, []);
+  if (!showMessage || !isReady) {
     return null;
   }
+
   return (
     <Alert status="info">
       <AlertIcon />
